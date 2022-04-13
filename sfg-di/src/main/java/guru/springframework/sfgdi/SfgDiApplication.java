@@ -1,6 +1,7 @@
 package guru.springframework.sfgdi;
 
 import com.springframework.pets.CatPetService;
+import com.springframework.pets.DogPetService;
 import guru.springframework.sfgdi.controllers.*;
 import guru.springframework.sfgdi.services.GreetingService;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "guru.springframework.sfgdi", "com.springframework.pets"})
+//@ComponentScan(basePackages = { "guru.springframework.sfgdi", "com.springframework.pets"})
 public class SfgDiApplication {
 
 	public static void main(String[] args) {
@@ -46,8 +47,8 @@ public class SfgDiApplication {
 
 		System.out.println("------- PetService");
 
-		CatPetService catPetService = ctx.getBean("catPetService", CatPetService.class);
+		DogPetService dogPetService = ctx.getBean("dogPetService", DogPetService.class);
 
-		System.out.println(catPetService.doingService());
+		System.out.println(dogPetService.doingService());
 	}
 }
