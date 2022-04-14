@@ -1,4 +1,3 @@
 # Spring FrameworkGuru
 
-The author of this course doesn't teach the theory at all, he just goes into the practice and tries to talk it over on the abstraction level. 
-1 / 5
+This repo contains source files and projects from Spring Framework 5: Beginner to Guru course.
