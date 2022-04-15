@@ -1,6 +1,7 @@
 package com.example.recipeproject.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -20,7 +21,10 @@ public class Recipe {
     // TODO: add Difficulty enum
 //    private Difficulty difficulty;
 
-    @Lob 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
+
+    @Lob
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -104,5 +108,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredientSet() {
+        return ingredients;
+    }
+
+    public void setIngredientSet(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
