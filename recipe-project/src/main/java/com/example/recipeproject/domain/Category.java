@@ -1,6 +1,8 @@
 package com.example.recipeproject.domain;
 
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -10,10 +12,16 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description;
+    private String categoryName;
 
     @ManyToMany(mappedBy = "categories")
-    private Set<Recipe> recipes;
+    private Set<Recipe> recipes = new HashSet<>();
+
+    public Category() {}
+
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     public Long getId() {
         return id;
@@ -23,12 +31,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Set<Recipe> getRecipes() {

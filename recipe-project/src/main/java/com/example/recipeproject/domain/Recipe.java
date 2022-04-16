@@ -1,6 +1,7 @@
 package com.example.recipeproject.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,27 +15,27 @@ public class Recipe {
     private Integer prepTime;
     private Integer cookTime;
     private Integer servings;
-    private String source;
-    private String url;
-    private String directions;
-
-    @Enumerated(value = EnumType.STRING)
-    private Difficulty difficulty;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private String URL;
 
     @Lob
-    private Byte[] image;
+    private String directions;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
-    @ManyToMany
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients = new HashSet<>();
+
+    public Recipe() {}
 
     public Long getId() {
         return id;
@@ -76,20 +77,12 @@ public class Recipe {
         this.servings = servings;
     }
 
-    public String getSource() {
-        return source;
+    public String getURL() {
+        return URL;
     }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 
     public String getDirections() {
@@ -100,22 +93,6 @@ public class Recipe {
         this.directions = directions;
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public Byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(Byte[] image) {
-        this.image = image;
-    }
-
     public Notes getNotes() {
         return notes;
     }
@@ -124,12 +101,12 @@ public class Recipe {
         this.notes = notes;
     }
 
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public Set<Category> getCategories() {
@@ -138,5 +115,13 @@ public class Recipe {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
