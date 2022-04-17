@@ -1,8 +1,7 @@
 package com.example.recipeproject.domain;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +9,8 @@ import java.util.Set;
 
 @Setter
 @Getter
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = "recipes")
 @Entity
 public class Category {
 
@@ -21,8 +22,6 @@ public class Category {
 
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes = new HashSet<>();
-
-    public Category() {}
 
     public Category(String categoryName) {
         this.categoryName = categoryName;

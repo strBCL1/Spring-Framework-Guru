@@ -1,12 +1,14 @@
 package com.example.recipeproject.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
 public class Ingredient {
 
@@ -22,8 +24,6 @@ public class Ingredient {
 
     @ManyToOne
     private Recipe recipe;
-
-    public Ingredient() {}
 
     public Ingredient(String ingredientName, Double amount, UnitOfMeasure uom) {
         this.ingredientName = ingredientName;

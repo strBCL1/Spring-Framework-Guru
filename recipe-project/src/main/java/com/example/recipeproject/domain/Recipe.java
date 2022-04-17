@@ -1,6 +1,7 @@
 package com.example.recipeproject.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
 public class Recipe {
 
@@ -39,8 +41,6 @@ public class Recipe {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
-
-    public Recipe() {}
 
     // CTRL + C, CTRL + V before Lombok refactoring, since Lombok deletes this setter during refactoring
     public void setNotes(Notes notes) {
