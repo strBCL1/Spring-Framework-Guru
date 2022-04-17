@@ -20,11 +20,10 @@ public class Ingredient {
 
     public Ingredient() {}
 
-    public Ingredient(String ingredientName, Double amount, UnitOfMeasure uom, Recipe recipe) {
+    public Ingredient(String ingredientName, Double amount, UnitOfMeasure uom) {
         this.ingredientName = ingredientName;
         this.amount = amount;
         this.uom = uom;
-        this.recipe = recipe;
     }
 
     public Long getId() {

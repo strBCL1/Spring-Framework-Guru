@@ -21,11 +21,6 @@ public class Notes {
         this.notes = notes;
     }
 
-    public Notes(String notes, Recipe recipe) {
-        this.notes = notes;
-        this.recipe = recipe;
-    }
-
     public Long getId() {
         return id;
     }

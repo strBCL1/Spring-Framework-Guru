@@ -75,7 +75,7 @@ public class RecipeBootstrap {
                 To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great.
 
 
-                Read more: https://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvoun5ws""", guacamoleRecipe));
+                Read more: https://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvoun5ws"""));
 
         guacamoleRecipe.setDifficulty(Difficulty.EASY);
 
@@ -85,9 +85,9 @@ public class RecipeBootstrap {
 
         Optional<UnitOfMeasure> pieceOptionalUnitOfMeasure = unitOfMeasureRepository.findByUom("Piece");
         UnitOfMeasure pieceUnitOfMeasure = pieceOptionalUnitOfMeasure.get();
-        guacamoleRecipe.getIngredients().add(new Ingredient("avocado", 2.0, pieceUnitOfMeasure, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("tomato", 0.5, pieceUnitOfMeasure, guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("chili", 2.0, pieceUnitOfMeasure, guacamoleRecipe));
+        guacamoleRecipe.addIngredient(new Ingredient("avocado", 2.0, pieceUnitOfMeasure));
+        guacamoleRecipe.addIngredient(new Ingredient("tomato", 0.5, pieceUnitOfMeasure));
+        guacamoleRecipe.addIngredient(new Ingredient("chili", 2.0, pieceUnitOfMeasure));
 
 
         // Tacos Recipe
@@ -109,7 +109,7 @@ public class RecipeBootstrap {
                 Grill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!
 
 
-                Read more: https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ""", tacosRecipe));
+                Read more: https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ"""));
 
         tacosRecipe.setDifficulty(Difficulty.MODERATE);
 
@@ -119,9 +119,9 @@ public class RecipeBootstrap {
 
         Optional<UnitOfMeasure> teaspoonOptionalUnitOfMeasure = unitOfMeasureRepository.findByUom("Teaspoon");
         UnitOfMeasure teaspoonUnitOfMeasure = teaspoonOptionalUnitOfMeasure.get();
-        tacosRecipe.getIngredients().add(new Ingredient("dried oregano", 1.0, teaspoonUnitOfMeasure, tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("sugar", 1.0, teaspoonUnitOfMeasure, tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("orange zest", 1.0, teaspoonUnitOfMeasure, tacosRecipe));
+        tacosRecipe.addIngredient(new Ingredient("dried oregano", 1.0, teaspoonUnitOfMeasure));
+        tacosRecipe.addIngredient(new Ingredient("sugar", 1.0, teaspoonUnitOfMeasure));
+        tacosRecipe.addIngredient(new Ingredient("orange zest", 1.0, teaspoonUnitOfMeasure));
 
         recipes.add(guacamoleRecipe);
         recipes.add(tacosRecipe);
