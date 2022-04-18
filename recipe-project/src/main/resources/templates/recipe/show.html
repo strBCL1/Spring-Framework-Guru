@@ -36,5 +36,8 @@
                 <li th:text="${ingredient.getIngredientName()}"></li>
             </ul>
         </p>
+
+        <a th:href="@{/recipe/{id}/edit/(id=${recipe.getId()})}">Edit the recipe! <br> </a>
+        <a th:href="@{/}">Go to home page!</a>
     </body>
 </html>

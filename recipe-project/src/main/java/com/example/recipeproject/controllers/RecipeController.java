@@ -1,8 +1,6 @@
 package com.example.recipeproject.controllers;
 
 import com.example.recipeproject.commands.RecipeCommand;
-import com.example.recipeproject.domain.Recipe;
-import com.example.recipeproject.services.CategoryService;
 import com.example.recipeproject.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +11,12 @@ import org.springframework.web.bind.annotation.*;
 public class RecipeController {
 
     private final RecipeService recipeService;
-    private final CategoryService categoryService;
 
-    public RecipeController(RecipeService recipeService, CategoryService categoryService) {
+    public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
-        this.categoryService = categoryService;
     }
 
-    @GetMapping("/show/{id}")
+    @GetMapping("/{id}/show")
     public String showById(@PathVariable long id, Model model) {
         model.addAttribute("recipe", recipeService.findById(id));
 
@@ -30,15 +26,21 @@ public class RecipeController {
     @GetMapping("/new")
     public String newRecipe(Model model) {
         model.addAttribute("recipe", new RecipeCommand());
-        model.addAttribute("categories", categoryService.getCategories());
 
-        return "recipe/new";
+        return "recipe/form";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editRecipe(@PathVariable long id, Model model) {
+        model.addAttribute("recipe", recipeService.findById(id));
+
+        return "recipe/form";
     }
 
     @PostMapping("/save")
     public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand) {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
 
-        return "redirect:/recipe/show/" + savedCommand.getId();
+        return "redirect:/recipe/" + savedCommand.getId() + "/show/";
     }
 }

@@ -20,7 +20,7 @@
                 <!--/*@thymesVar id="recipe" type="com.example.recipeproject.domain.Recipe"*/-->
                 <td th:text="${recipe.id}">recipe_id</td>
                 <td th:text="${recipe.description}">recipe_description</td>
-                <td> <a th:href="@{'/recipe/show/' + ${recipe.id}}"> View </a> </td>
+                <td> <a th:href="@{'/recipe/' + ${recipe.id} + '/show/'}"> View </a> </td>
             </tr>
         </table>
 
