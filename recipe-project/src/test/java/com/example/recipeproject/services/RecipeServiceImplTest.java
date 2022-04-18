@@ -4,27 +4,31 @@ import com.example.recipeproject.domain.Recipe;
 import com.example.recipeproject.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RecipeServiceImplTest {
+    @Mock
     RecipeRepository recipeRepository;
-    RecipeServiceImpl recipeService;
+
+    RecipeService recipeService;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+
         recipeService = new RecipeServiceImpl(recipeRepository);
     }
 
     @Test
-    public void getRecipeByIdTest() throws Exception {
-        Recipe recipe = new Recipe();
-        recipe.setId(1L);
-        Optional<Recipe> optionalRecipe = Optional.of(recipe);
-
-        Recipe recipeReturned = recipeService.findById(1L);
-        assertNotNull(recipeReturned);
+    public void getRecipes() {
+        Set<Recipe> recipeSet = recipeService.getRecipes();
+        assertEquals(0, recipeSet.size());
     }
 }
