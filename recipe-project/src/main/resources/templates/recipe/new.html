@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
 
-</body>
+        <style>
+            form {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                width: 15%;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <form th:object="${recipe}" th:action="@{/recipe/save}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+
+            <!--description-->
+            <label for="input_description"> Input description: </label>
+            <input type="text" th:field="*{description}" id="input_description"/>
+
+
+            <!--preptime-->
+            <label for="input_prepTime"> Input preptime: </label>
+            <input type="number" th:field="*{prepTime}" id="input_prepTime"/>
+
+
+            <!--cooktime-->
+            <label for="input_cookTime"> Input cooktime: </label>
+            <input type="number" th:field="*{cookTime}" id="input_cookTime"/>
+
+
+            <!--servings-->
+            <label for="input_servings"> Input servings: </label>
+            <input type="number" th:field="*{servings}" id="input_servings"/>
+
+
+            <!--URL-->
+            <label for="input_URL"> Input URL: </label>
+            <input type="url" th:field="*{URL}" id="input_URL"/>
+
+
+            <!--directions-->
+            <label for="input_directions"> Input directions: </label>
+            <input type="text" th:field="*{directions}" id="input_directions"/>
+
+
+            <!--notes-->
+            <label for="input_notes"> Input notes: </label>
+            <input type="text" th:field="*{notes.notes}" id="input_notes"/>
+
+
+            <!--difficulty-->
+            <label> Choose difficulty:
+                <select name="difficulty" th:field="*{difficulty}">
+                    <option th:each="difficulty : ${T(com.example.recipeproject.domain.Difficulty).values()}"
+                            th:text="${difficulty.name()}"
+                            th:value="${difficulty.name()}">DIFFICULTY</option>
+                </select>
+            </label>
+
+
+            <!--categories-->
+<!--            <label> Choose categories:-->
+<!--                <select name="category" th:field="*{categories}" multiple>-->
+<!--                    <option th:each="category : ${categories}"-->
+<!--                            th:text="${category.getCategoryName()}"-->
+<!--                            th:value="${category.getCategoryName()}">CATEGORY</option>-->
+<!--                </select>-->
+<!--            </label>-->
+
+            // TODO: добавить каждуб выбранную категорию в сет
+
+            <input type="submit" value="Create new recipe!"/>
+        </form>
+    </body>
 </html>
