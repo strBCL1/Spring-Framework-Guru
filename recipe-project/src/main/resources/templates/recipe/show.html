@@ -31,13 +31,9 @@
             </ul>
         </p>
 
-        <p> INGREDIENTS:
-            <ul th:each="ingredient : ${recipe.getIngredients()}">
-                <li th:text="${ingredient.getIngredientName()}"></li>
-            </ul>
-        </p>
 
-        <a th:href="@{'/recipe/' + ${recipe.id} + '/edit/'}"> Edit the recipe! <br> </a>
+        <a th:href="@{'/recipe/' + ${recipe.id} + '/edit'}"> Edit the recipe! <br> </a>
+        <a th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}">View ingredients!</a>
         <a th:href="@{'/recipe/' + ${recipe.id} + '/delete'}"> Delete the recipe! <br> </a>
         <a th:href="@{/}">Go to home page!</a>
     </body>
