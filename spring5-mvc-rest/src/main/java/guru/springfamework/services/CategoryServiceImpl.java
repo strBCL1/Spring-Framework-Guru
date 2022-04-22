@@ -8,26 +8,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by jt on 9/26/17.
- */
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryMapper categoryMapper;
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
     public CategoryServiceImpl(CategoryMapper categoryMapper, CategoryRepository categoryRepository) {
-        this.categoryMapper = categoryMapper;
         this.categoryRepository = categoryRepository;
+        this.categoryMapper = categoryMapper;
     }
 
     @Override
     public List<CategoryDTO> getAllCategories() {
-
-        return categoryRepository.findAll()
-                .stream()
-                .map(categoryMapper::categoryToCategoryDTO)
+        return categoryRepository.findAll().stream()
+                .map(CategoryMapper.INSTANCE::categoryToCategoryDTO)
                 .collect(Collectors.toList());
     }
 
