@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-class CategoryServiceTest {
+class CategoryServiceImplTest {
 
     public static final String NAME = "fruits";
     public static final long ID = 1L;
