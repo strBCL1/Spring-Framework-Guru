@@ -2,8 +2,6 @@ package guru.springfamework.controllers.v1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springfamework.api.v1.model.CustomerDTO;
-import guru.springfamework.domain.Customer;
-import guru.springfamework.repositories.CustomerRepository;
 import guru.springfamework.services.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,12 +16,10 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -106,5 +102,26 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.id", equalTo(customerDTO.getId().intValue())))
                 .andExpect(jsonPath("$.firstname", equalTo(customerDTO.getFirstname())))
                 .andExpect(jsonPath("$.lastname", equalTo(customerDTO.getLastname())));
+    }
+
+    @Test
+    void patchCustomerByDTO() throws Exception {
+        long id = 1L;
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setId(id);
+        customerDTO.setFirstname("firstname");
+        customerDTO.setLastname("lastname");
+
+        when(customerService.patchCustomerByDTO(anyLong(), any(CustomerDTO.class)))
+                .thenReturn(customerDTO);
+
+        ObjectMapper mapper = new ObjectMapper();
+        mockMvc.perform(patch("/api/v1/customers/" + id)
+                .content(mapper.writeValueAsString(customerDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", equalTo((int) id)))
+                .andExpect(jsonPath("$.firstname", equalTo("firstname")))
+                .andExpect(jsonPath("$.lastname", equalTo("lastname")));
     }
 }
