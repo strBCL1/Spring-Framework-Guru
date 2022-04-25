@@ -60,6 +60,11 @@ public class CustomerServiceImpl implements CustomerService {
         }).orElseThrow(() -> new RuntimeException("No such ID found!"));
     }
 
+    @Override
+    public void deleteCustomerById(long id) {
+        customerRepository.deleteById(id);
+    }
+
     private CustomerDTO saveAndReturnDTO(Customer customer) {
         Customer savedCustomer = customerRepository.save(customer);
 

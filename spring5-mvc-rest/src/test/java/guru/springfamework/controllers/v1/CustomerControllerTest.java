@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -123,5 +123,14 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.id", equalTo((int) id)))
                 .andExpect(jsonPath("$.firstname", equalTo("firstname")))
                 .andExpect(jsonPath("$.lastname", equalTo("lastname")));
+    }
+
+    @Test
+    void deleteCustomerById() throws Exception {
+        long id = 1L;
+
+        mockMvc.perform(delete("/api/v1/customers/" + id)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
